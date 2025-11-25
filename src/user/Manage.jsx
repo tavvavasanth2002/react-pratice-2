@@ -18,7 +18,7 @@ export default function Manage(){
     }
       useEffect(()=>{
       getdata();
-    },[])
+    },[])   
     var updateNow=(obj)=>{
         setProductId(obj._id)
         setProductName(obj.productName)

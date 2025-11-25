@@ -5,7 +5,7 @@ export default function Dashboard(){
     var navigate=useNavigate()
 
     useEffect(()=>{
-        if(!localStorage.getItem("username")){
+        if(!sessionStorage.getItem("token")){
          navigate("/")   
         }
     })

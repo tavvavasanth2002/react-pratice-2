@@ -1,21 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "./api";
 
 export default function Login(){
     var [userName,setUserName]=useState('')
     var [pwd,setpwd]=useState("")
     var navigate=useNavigate()
-    var checkLogin=(e)=>{
+    var response;
+    var checkLogin=async (e)=>{
         e.preventDefault()
-        console.log(userName,pwd)
-        if(userName.slice(0,3)+"@123"==pwd){
-            alert("Login success")
-            navigate("/nav/view")
-            localStorage.setItem("username",userName)
+        response=await login({"userName":userName,"password":pwd})
+        console.log(response)
+        if(response.data.token){
+            sessionStorage.setItem("token",response.data.token)
+            navigate("nav/view")
         }
         else{
-            alert("check username or password")
+            alert(await response.data.message)
         }
+        
+        
     }
     return(
         <>
